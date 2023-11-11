@@ -1,4 +1,4 @@
-package com.example.photoappdiscoveryservice;
+package com.example.photoapp.discoveryservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

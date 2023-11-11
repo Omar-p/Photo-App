@@ -1,4 +1,4 @@
-package com.example.photoappdiscoveryservice;
+package com.example.photoapp.discoveryservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
