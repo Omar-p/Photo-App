@@ -1,0 +1,47 @@
+server:
+  port: 8088
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: users-service-status-check
+          uri: lb://USERS-SERVICE
+          predicates:
+            - Path=/users/status/check
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/users/status/check, /actuator/health
+        - id: register-user
+          uri: lb://USERS-SERVICE
+          predicates:
+            - Path=/users
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/users, /users
+        - id: login-user
+          uri: lb://USERS-SERVICE
+          predicates:
+            - Path=/users/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath= (?<segment>/users/login), /$\{segment}
+  application:
+    name: api-gateway
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: TRACE
