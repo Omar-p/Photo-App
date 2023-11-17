@@ -2,10 +2,20 @@ server:
   port: 0
 spring:
   application:
-    name: users-ws
+    name: users-service
   devtools:
     restart:
       enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/users_db
+    username: users_db
+    password: secret
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    generate-ddl: true
+
 management:
   endpoints:
     web:
@@ -15,3 +25,16 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+gateway:
+  ip: 192.168.100.4
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
+token:
+  secret: qetuowryipadgjlsfhkzcbmxvn1qazxsw23edcvfr45tgbnhy67ujm,ki8lo9p0
+  expiration_time: 3600000
+login:
+    url:
+      path: /users/login
